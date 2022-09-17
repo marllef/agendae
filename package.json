@@ -1,13 +1,15 @@
 {
   "name": "agendae",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.1.0",
+  "description": "Um incrivel app de agendamentos",
+  "author": "Marllef H. A. Freitas",
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "web": "yarn workspace @agendae/web",
-    "server": "",
+    "server": "yarn workspace @agendae/server",
     "prisma": ""
   },
   "license": "MIT",
