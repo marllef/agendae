@@ -1,0 +1,17 @@
+{
+  "name": "agendae",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "web": "yarn workspace @agendae/web",
+    "server": "",
+    "prisma": ""
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "prisma": "^4.3.1"
+  }
+}
