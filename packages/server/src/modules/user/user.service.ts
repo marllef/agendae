@@ -34,8 +34,6 @@ export class UserService {
       },
     });
 
-    created.password = undefined;
-
     return created;
   }
 
@@ -52,16 +50,14 @@ export class UserService {
     return users;
   }
 
-  async findOne(id: string) {
+  async findOne(email: string) {
     const user = await this.prisma.user.findFirst({
       where: {
-        id,
+        email,
       },
     });
 
     if (!user) throw new NotFoundException('Usuário não encontrado.');
-
-    user.password = undefined;
 
     return user;
   }
@@ -73,8 +69,6 @@ export class UserService {
       },
       data,
     });
-
-    updated.password = undefined;
 
     return updated;
   }
