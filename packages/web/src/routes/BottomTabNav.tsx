@@ -8,11 +8,13 @@ import { FavoritePage } from '~/pages/nav/favorite';
 export default () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/schedule" element={<SchedulePage />} />
-      <Route path="/search" element={<SearchPage />} />
-      <Route path="/favorites" element={<FavoritePage />} />
-      <Route path="/profile" element={<ProfilePage />} />
+      <Route path="/">
+        <Route path="home" element={<HomePage />} />
+        <Route path="schedule" element={<SchedulePage />} />
+        <Route path="search" element={<SearchPage />} />
+        <Route path="favorites" element={<FavoritePage />} />
+        <Route path="profile" element={<ProfilePage />} />
+      </Route>
     </Routes>
   );
 };

@@ -20,10 +20,10 @@ export const TabBarNavigate = ({ children }: any) => {
       </main>
       <div className="fixed bottom-0 left-0 right-0 md:hidden select-none transition">
         <TabBar value={pathname}>
-          <TabBarItem icon={Home} value={'/'}>
+          <TabBarItem icon={Home} value={'/app/home'}>
             Inicio
           </TabBarItem>
-          <TabBarItem iconSize={28} icon={Search} value={'/search'}>
+          <TabBarItem iconSize={28} icon={Search} value={'/app/search'}>
             Pesquisar
           </TabBarItem>
 
@@ -36,12 +36,12 @@ export const TabBarNavigate = ({ children }: any) => {
             className="flex absolute z-50 bg-teal-600 rounded-full w-16 h-16  transition-all duration-300
             ring-transparent ring-4 focus:ring-teal-400 text-slate-50 border-white 
             -mt-4 left-[calc(50%-4rem/2)]"
-            value={'/schedule'}
+            value={'/app/schedule'}
           />
-          <TabBarItem icon={IoMdHeart} value={'/favorites'}>
+          <TabBarItem icon={IoMdHeart} value={'/app/favorites'}>
             Favoritos
           </TabBarItem>
-          <TabBarItem icon={IoMdPerson} value={'/profile'}>
+          <TabBarItem icon={IoMdPerson} value={'/app/profile'}>
             Perfil
           </TabBarItem>
         </TabBar>

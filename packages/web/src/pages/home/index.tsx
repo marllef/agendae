@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TabBarNavigate } from '~/navigations/';
+import { TabBarNavigate } from '~/navigator';
 
 export const HomePage = () => {
   return (

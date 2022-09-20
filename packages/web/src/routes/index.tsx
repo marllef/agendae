@@ -6,15 +6,14 @@ import { SearchPage } from '~/pages/nav/search';
 import { ProfilePage } from '~/pages/nav/profile';
 import { RegisterPage } from '~/pages/register';
 import { FavoritePage } from '~/pages/nav/favorite';
-import { TabBarNavigate } from '~/navigations';
+import { TabBarNavigate } from '~/navigator';
 
 export default () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route>
-          <Route path="/*" element={<TabBarNavigate />} />
-        </Route>
+        <Route path="/app/*" element={<TabBarNavigate />} />
+
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
       </Routes>

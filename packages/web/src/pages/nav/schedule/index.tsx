@@ -1,4 +1,4 @@
-import { TabBarNavigate } from '~/navigations';
+import { TabBarNavigate } from '~/navigator';
 
 export const SchedulePage = () => {
   return (
