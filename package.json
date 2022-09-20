@@ -10,7 +10,7 @@
   "scripts": {
     "web": "yarn workspace @agendae/web",
     "server": "yarn workspace @agendae/server",
-    "prisma": ""
+    "prisma": "yarn server prisma"
   },
   "license": "MIT",
   "devDependencies": {
