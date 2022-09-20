@@ -14,7 +14,7 @@ model User {
   image    String
   password String
 
-  roles Roles[]
+  roles Roles[] @default([USER])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
