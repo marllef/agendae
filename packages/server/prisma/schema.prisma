@@ -8,16 +8,126 @@ datasource db {
 }
 
 model User {
-  id       String @id @default(uuid())
+  id       String  @id @default(uuid())
   name     String
-  email    String @unique
-  image    String
+  email    String  @unique
+  image    String?
   password String
 
   roles Roles[] @default([USER])
 
+  active Boolean @default(true)
+
+  schedules Schedule[]
+
+  business   Business? @relation(fields: [businessId], references: [id])
+  businessId Int?      @unique
+
+  service   Service? @relation(fields: [serviceId], references: [id])
+  serviceId Int?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
+}
+
+model Business {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  owner User?
+
+  location   BusinessLocation? @relation(fields: [locationId], references: [id])
+  locationId Int?
+
+  services Service[]
+
+  tags String[]
+
+  ratings Float[]
+}
+
+model BusinessLocation {
+  id Int @id @default(autoincrement())
+
+  tag String?
+
+  address    String
+  complement String?
+  city       String
+  state      String
+  country    String
+  zip        String?
+
+  business Business[]
+}
+
+model Service {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String?
+
+  value Decimal?
+
+  providers User[]
+
+  images Image[]
+
+  type   ServiceType? @relation(fields: [typeId], references: [id])
+  typeId Int?
+
+  schedules Schedule[]
+
+  business   Business? @relation(fields: [businessId], references: [id])
+  businessId Int?
+}
+
+model ServiceType {
+  id   Int    @id @default(autoincrement())
+  name String
+
+  services Service[]
+}
+
+model Image {
+  id Int @id @default(autoincrement())
+
+  name String?
+  alt  String?
+
+  path String
+
+  service   Service? @relation(fields: [serviceId], references: [id])
+  serviceId Int?
+
+  uploudedAt DateTime @default(now())
+}
+
+model Schedule {
+  id Int @id @default(autoincrement())
+
+  date DateTime @db.Date
+  time DateTime @db.Time()
+
+  services Service[]
+
+  status ScheduleStatus @default(SCHEDULED)
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+
+  totalValue Decimal?
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
+  canceledAt DateTime?
+}
+
+enum ScheduleStatus {
+  DONE
+  LATE
+  SCHEDULED
+  CANCELED
 }
 
 enum Roles {
