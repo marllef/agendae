@@ -8,7 +8,7 @@ export class ScheduleService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateScheduleDto) {
-    const { date, time, totalValue, owner, services } = data;
+    const { date, time, totalValue, owner, business, services } = data;
     const created = await this.prisma.schedule.create({
       data: {
         date,
@@ -17,6 +17,11 @@ export class ScheduleService {
         owner: {
           connect: {
             id: owner,
+          },
+        },
+        business: {
+          connect: {
+            id: business,
           },
         },
         services: {
@@ -44,6 +49,7 @@ export class ScheduleService {
       },
       include: {
         services: true,
+        owner: true,
       },
     });
     return schedule;

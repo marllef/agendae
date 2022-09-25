@@ -17,6 +17,8 @@ export class CreateScheduleDto {
   totalValue?: number | string;
   @ApiProperty()
   owner: string;
+  @ApiProperty()
+  business: number;
   @ApiProperty({
     isArray: true,
     type: Number,

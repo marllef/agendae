@@ -40,7 +40,8 @@ model Business {
   location   BusinessLocation? @relation(fields: [locationId], references: [id])
   locationId Int?
 
-  services Service[]
+  schedules Schedule[]
+  services  Service[]
 
   tags String[]
 
@@ -113,8 +114,11 @@ model Schedule {
 
   status ScheduleStatus @default(SCHEDULED)
 
-  owner   User?   @relation(fields: [ownerId], references: [id])
-  ownerId String?
+  owner   User   @relation(fields: [ownerId], references: [id])
+  ownerId String
+
+  business   Business @relation(fields: [businessId], references: [id])
+  businessId Int
 
   totalValue Decimal?
 
