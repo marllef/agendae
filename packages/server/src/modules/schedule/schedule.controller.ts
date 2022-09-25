@@ -8,7 +8,7 @@ import {
   Delete,
 } from '@nestjs/common';
 import { ScheduleService } from './schedule.service';
-import { CreateScheduleDto } from './dto/create-schedule.dto';
+import { CreateScheduleDto } from './dto/create.dto';
 import { UpdateScheduleDto } from './dto/update-schedule.dto';
 import { ApiTags } from '@nestjs/swagger';
 

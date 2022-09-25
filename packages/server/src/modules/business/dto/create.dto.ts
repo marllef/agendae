@@ -1,18 +1,34 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Service } from '@prisma/client';
 
+class Location {
+  @ApiProperty()
+  tag?: string;
+  @ApiProperty()
+  address: string;
+  @ApiProperty()
+  complement?: string;
+  @ApiProperty()
+  city: string;
+  @ApiProperty()
+  state: string;
+  @ApiProperty()
+  country: string;
+  @ApiProperty()
+  zip?: string;
+}
+
 export class CreateBusinessDto {
+  @ApiProperty()
   name: string;
+  @ApiProperty()
   description?: string;
+  @ApiProperty()
   owner: string;
+  @ApiProperty()
   tags?: string[];
+  @ApiProperty()
   services?: Service[];
-  location: {
-    tag?: string;
-    address: string;
-    complement?: string;
-    city: string;
-    state: string;
-    country: string;
-    zip?: string;
-  };
+  @ApiProperty()
+  location: Location;
 }
