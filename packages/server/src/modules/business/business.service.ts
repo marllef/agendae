@@ -8,12 +8,13 @@ export class BusinessService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateBusinessDto) {
-    const { name, description, owner, location } = data;
+    const { name, description, owner, location, tags } = data;
 
     const business = await this.prisma.business.create({
       data: {
         name,
         description,
+        tags,
         owner: {
           connect: {
             id: owner,

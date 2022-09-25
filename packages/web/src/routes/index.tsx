@@ -15,7 +15,7 @@ export default () => {
         <Route path="/app/*" element={<TabBarNavigate />} />
 
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );

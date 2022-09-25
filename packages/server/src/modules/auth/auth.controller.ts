@@ -1,5 +1,13 @@
-import { Controller, Post, UseGuards, Request, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  UseGuards,
+  Request,
+  Body,
+  Get,
+} from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { Request as Req } from 'express';
 import { LocalAuthGuard } from 'src/guards/local-auth.guard';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto';
@@ -20,5 +28,11 @@ export class AuthController {
   @Post('register')
   async register(@Body() body: RegisterDto) {
     return this.auth.register(body);
+  }
+
+  @Get('validate')
+  async getCurrentUser(@Request() req: Req) {
+    const token = req.headers.authorization?.split(' ')[1];
+    return this.auth.getCurrentUser(token);
   }
 }

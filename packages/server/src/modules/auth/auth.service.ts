@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UserService } from '../user/user.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
@@ -41,7 +41,20 @@ export class AuthService {
     const registered = await this.userService.create(data);
 
     registered.password = undefined;
-    
+
     return registered;
+  }
+
+  async getCurrentUser(token?: string) {
+    const payload: any = this.jwtService.decode(token ?? '');
+
+    if (!payload) throw new UnauthorizedException('Sessão inválida.');
+    console.log(payload.sub);
+
+    const user = await this.userService.findOne(payload.sub);
+
+    user.password = undefined;
+
+    return user;
   }
 }
