@@ -6,7 +6,6 @@ import { UserModule } from 'src/modules/user/user.module';
 import { BusinessModule } from '~/modules/business/business.module';
 import { ScheduleModule } from '~/modules/schedule/schedule.module';
 import { ServiceModule } from '~/modules/service/service.module';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({

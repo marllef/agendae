@@ -1,9 +1,30 @@
 import { Input } from '~/components/Input';
 import { IoAt } from 'react-icons/io5';
-import { MdLock, MdPerson } from 'react-icons/md';
+import { MdFace, MdLock, MdPerson, MdPhoto } from 'react-icons/md';
 import { Button, Link } from '~/components/Button';
+import { MouseEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import useAuth from '~/hooks/useAuth';
+import { InternalError } from '~/utils/helpers';
 
 export const RegisterPage = () => {
+  const [itens, setItens] = useState<any>({});
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  const validate = itens.email && itens.password && itens.name;
+
+  const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    try {
+      if (!validate) throw new InternalError('Informe os dados corretamente.');
+      await auth.register(itens);
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div className="flex flex-col w-full h-screen justify-center items-center p-4">
       <span className="pb-4 text-center">
@@ -13,12 +34,33 @@ export const RegisterPage = () => {
         </p>
       </span>
       <div className="flex flex-col space-y-2 ">
-        <Input icon={MdPerson} placeholder="Nome" />
-        <Input icon={IoAt} placeholder="Email" />
-        <Input icon={MdLock} placeholder="Senha" />
+        <Input
+          icon={MdPerson}
+          placeholder="Nome"
+          onChange={(evt) => setItens({ ...itens, name: evt.target.value })}
+        />
+        <Input
+          icon={MdFace}
+          placeholder="Imagem"
+          onChange={(evt) => setItens({ ...itens, image: evt.target.value })}
+        />
+
+        <Input
+          icon={IoAt}
+          placeholder="Email"
+          onChange={(evt) => setItens({ ...itens, email: evt.target.value })}
+        />
+        <Input
+          icon={MdLock}
+          placeholder="Senha"
+          type={'password'}
+          onChange={(evt) => setItens({ ...itens, password: evt.target.value })}
+        />
 
         <span />
-        <Button>Cadastrar</Button>
+        <Button onClick={handleSubmit} disabled={!validate}>
+          Cadastrar
+        </Button>
       </div>
     </div>
   );

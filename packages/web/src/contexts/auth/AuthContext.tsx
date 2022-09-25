@@ -1,5 +1,11 @@
+import { User } from '@prisma/client';
 import { createContext } from 'react';
 
-type AuthState = {};
+type AuthState = {
+  user: User | null;
+  login: (email: string, password: string) => Promise<void>;
+  register: (data: User) => Promise<void>;
+  isAuthenticated: boolean;
+};
 
 export const AuthContext = createContext<AuthState>(null);

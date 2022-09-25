@@ -1,9 +1,9 @@
 import { User } from '@prisma/client';
 import { api } from '~/configs';
-import { LoginSuccessResponse } from '~/interfaces';
+import { LoginSuccessResponse, RegisterSuccessResponse } from '~/interfaces';
 import { InternalError } from '~/utils/helpers';
 
-export default () => ({
+export default {
   signIn: async (email: string, password: string) => {
     try {
       const response = await api.post<LoginSuccessResponse>('/auth/login', {
@@ -13,9 +13,19 @@ export default () => ({
 
       return response.data;
     } catch (err: any) {
-      const error = new InternalError(err);
-      console.log(error.message);
+      throw new InternalError(err);
     }
   },
-  signUp: async (data: User) => {},
-});
+  signUp: async (data: User) => {
+    try {
+      const response = await api.post<RegisterSuccessResponse>(
+        '/auth/register',
+        data,
+      );
+
+      return response.data;
+    } catch (err: any) {
+      throw new InternalError(err);
+    }
+  },
+};

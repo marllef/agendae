@@ -4,13 +4,16 @@ import { MdLock } from 'react-icons/md';
 import { Button, Link } from '~/components/Button';
 import { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from '~/hooks/useAuth';
 
 export const LoginPage = () => {
   const [itens, setItens] = useState<any>({});
+  const auth = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    await auth.login(itens.email, itens.password);
     navigate('/');
   };
 
@@ -31,9 +34,10 @@ export const LoginPage = () => {
         <Input
           icon={MdLock}
           placeholder="Senha"
+          type={'password'}
           onChange={(evt) => setItens({ ...itens, password: evt.target.value })}
         />
-        <div className='flex justify-end'>
+        <div className="flex justify-end">
           <Link className="w-full text-end px-2" href="/forgot-password">
             Esqueceu a senha?
           </Link>

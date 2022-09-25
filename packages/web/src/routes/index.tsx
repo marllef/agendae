@@ -10,13 +10,11 @@ import { TabBarNavigate } from '~/navigator';
 
 export default () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/app/*" element={<TabBarNavigate />} />
+    <Routes>
+      <Route path="/app/*" element={<TabBarNavigate />} />
 
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/" element={<LoginPage />} />
-      </Routes>
-    </BrowserRouter>
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/" element={<LoginPage />} />
+    </Routes>
   );
 };

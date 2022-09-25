@@ -49,7 +49,6 @@ export class AuthService {
     const payload: any = this.jwtService.decode(token ?? '');
 
     if (!payload) throw new UnauthorizedException('Sessão inválida.');
-    console.log(payload.sub);
 
     const user = await this.userService.findOne(payload.sub);
 
