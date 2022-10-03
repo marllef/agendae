@@ -7,7 +7,7 @@ import {
   IoMdHome as Home,
   IoMdPerson,
 } from 'react-icons/io';
-import { MdSearch as Search } from 'react-icons/md';
+import { MdSearch as Search, MdStore } from 'react-icons/md';
 import BottomTabNav from '~/routes/BottomTabNav';
 
 export const TabBarNavigate = ({ children }: any) => {
@@ -20,7 +20,7 @@ export const TabBarNavigate = ({ children }: any) => {
       </main>
       <div className="fixed bottom-0 left-0 right-0 md:hidden select-none transition">
         <TabBar value={pathname}>
-          <TabBarItem icon={Home} value={'/app/home'}>
+          <TabBarItem icon={MdStore} value={'/app/home'}>
             Inicio
           </TabBarItem>
           <TabBarItem iconSize={28} icon={Search} value={'/app/search'}>

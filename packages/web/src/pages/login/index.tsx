@@ -13,8 +13,13 @@ export const LoginPage = () => {
 
   const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    await auth.login(itens.email, itens.password);
-    navigate('/');
+    try {
+      await auth.login(itens.email, itens.password);
+      setItens({});
+      navigate('/app/home');
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   return (
@@ -27,12 +32,12 @@ export const LoginPage = () => {
       </span>
       <div className="flex flex-col space-y-2 ">
         <Input
-          icon={IoAt}
+          leftIcon={IoAt}
           placeholder="Email"
           onChange={(evt) => setItens({ ...itens, email: evt.target.value })}
         />
         <Input
-          icon={MdLock}
+          leftIcon={MdLock}
           placeholder="Senha"
           type={'password'}
           onChange={(evt) => setItens({ ...itens, password: evt.target.value })}

@@ -19,7 +19,7 @@ export const RegisterPage = () => {
     try {
       if (!validate) throw new InternalError('Informe os dados corretamente.');
       await auth.register(itens);
-      navigate('/');
+      navigate('/home/app');
     } catch (err) {
       console.log(err);
     }
@@ -35,23 +35,23 @@ export const RegisterPage = () => {
       </span>
       <div className="flex flex-col space-y-2 ">
         <Input
-          icon={MdPerson}
+          leftIcon={MdPerson}
           placeholder="Nome"
           onChange={(evt) => setItens({ ...itens, name: evt.target.value })}
         />
         <Input
-          icon={MdFace}
+          leftIcon={MdFace}
           placeholder="Imagem"
           onChange={(evt) => setItens({ ...itens, image: evt.target.value })}
         />
 
         <Input
-          icon={IoAt}
+          leftIcon={IoAt}
           placeholder="Email"
           onChange={(evt) => setItens({ ...itens, email: evt.target.value })}
         />
         <Input
-          icon={MdLock}
+          leftIcon={MdLock}
           placeholder="Senha"
           type={'password'}
           onChange={(evt) => setItens({ ...itens, password: evt.target.value })}
