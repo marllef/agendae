@@ -1,4 +1,3 @@
-import { TabBarNavigate } from '~/navigator';
 
 export const ProfilePage = () => {
   return (

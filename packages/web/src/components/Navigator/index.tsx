@@ -1,10 +1,8 @@
-import { useState } from 'react';
-import { useLocation, useNavigate, useNavigation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { TabBar, TabBarItem } from '~/components/TabBar';
 import {
   IoMdCalendar as Calendar,
   IoMdHeart,
-  IoMdHome as Home,
   IoMdPerson,
 } from 'react-icons/io';
 import { MdSearch as Search, MdStore } from 'react-icons/md';

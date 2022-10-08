@@ -39,7 +39,7 @@ export const StarRating = ({ ratings }: Props) => {
               />
             ))}
           </div>
-          <p>({Math.abs(value)})</p>
+          <p className="text-xs">({Math.abs(value)})</p>
         </>
       ) : (
         <span className="font-bold">Novidade!</span>

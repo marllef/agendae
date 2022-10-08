@@ -1,6 +1,4 @@
-import { Business } from '@prisma/client';
 import { useCallback } from 'react';
-import { MdStar } from 'react-icons/md';
 import { Button } from '~/components/Button';
 import { Skeleton } from '~/components/Skeleton';
 import { StarRating } from '~/components/StarRating';

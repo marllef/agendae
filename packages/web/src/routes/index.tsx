@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { LoginPage } from '~/pages/login';
 import { RegisterPage } from '~/pages/register';
-import { TabBarNavigate } from '~/navigator';
+import { TabBarNavigate } from '~/components/Navigator';
 
 export default () => {
   return (
