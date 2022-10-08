@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { ApiOperation, ApiTags } from '@nestjs/swagger';
 import { Request as Req } from 'express';
-import { LocalAuthGuard } from 'src/guards/local-auth.guard';
+import { LocalAuthGuard, JwtAuthGuard } from '~/guards';
 import { AuthService } from './auth.service';
 import { RegisterDto } from './dto';
 import { LoginDto } from './dto/login.dto';
@@ -30,6 +30,7 @@ export class AuthController {
     return this.auth.register(body);
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get('validate')
   async getCurrentUser(@Request() req: Req) {
     const token = req.headers.authorization?.split(' ')[1];

@@ -5,6 +5,10 @@ import { Button, Link } from '~/components/Button';
 import { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
+import { keys, routes } from '~/configs';
+import { LoginSchema } from '~/utils/validation/LoginValidation';
+import { Toastify } from '~/utils/toast';
+import { InternalError } from '~/utils/helpers';
 
 export const LoginPage = () => {
   const [itens, setItens] = useState<any>({});
@@ -14,11 +18,14 @@ export const LoginPage = () => {
   const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      await auth.login(itens.email, itens.password);
+      const validated = await LoginSchema.validate(itens);
+
+      await auth.login(validated.email, validated.password);
       setItens({});
-      navigate('/app/home');
+      navigate(routes.APP_HOME_ROUTE);
     } catch (err: any) {
-      console.log(err.message);
+      const error = new InternalError(err);
+      Toastify.error(error.message);
     }
   };
 
@@ -27,29 +34,35 @@ export const LoginPage = () => {
       <span className="pb-4 text-center">
         <h1 className="text-3xl font-semibold text-teal-600">Fazer Login</h1>
         <p className="text-xs py-1">
-          Ainda não tem uma conta? <Link href="/register">Registre-se</Link>.
+          Ainda não tem uma conta?{' '}
+          <Link href={routes.APP_REGISTER_ROUTE}>Registre-se</Link>.
         </p>
       </span>
-      <div className="flex flex-col space-y-2 ">
+      <form className="flex flex-col space-y-2 ">
         <Input
           leftIcon={IoAt}
+          required
           placeholder="Email"
           onChange={(evt) => setItens({ ...itens, email: evt.target.value })}
         />
         <Input
           leftIcon={MdLock}
+          required
           placeholder="Senha"
           type={'password'}
           onChange={(evt) => setItens({ ...itens, password: evt.target.value })}
         />
         <div className="flex justify-end">
-          <Link className="w-full text-end px-2" href="/forgot-password">
+          <Link
+            className="w-full text-end px-2"
+            href={routes.APP_FORGOT_PWD_ROUTE}
+          >
             Esqueceu a senha?
           </Link>
         </div>
         <span />
         <Button onClick={handleSubmit}>Logar</Button>
-      </div>
+      </form>
     </div>
   );
 };

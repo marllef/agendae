@@ -34,7 +34,8 @@ export const AuthProvider = ({ children }: Props) => {
       const { token } = await AuthService.signIn(email, password);
       localStorage.setItem(keys.AUTH_TOKEN, token);
     } catch (err: any) {
-      console.log(err.message);
+      const error = new InternalError(err);
+      throw error;
     }
   };
 
@@ -47,8 +48,14 @@ export const AuthProvider = ({ children }: Props) => {
     }
   };
 
+  const signOut = async () => {
+    localStorage.setItem(keys.AUTH_TOKEN, '');
+  };
+
   return (
-    <AuthContext.Provider value={{ user, login, register, isAuthenticated }}>
+    <AuthContext.Provider
+      value={{ user, login, register, signOut, isAuthenticated }}
+    >
       {children}
     </AuthContext.Provider>
   );
