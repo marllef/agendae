@@ -5,22 +5,23 @@ import { Button, Link } from '~/components/Button';
 import { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
-import { keys, routes } from '~/configs';
-import { LoginSchema } from '~/utils/validation/LoginValidation';
+import { routes } from '~/configs';
 import { Toastify } from '~/utils/toast';
 import { InternalError } from '~/utils/helpers';
+import { LoginFormSchema, loginSchema as schema } from './FormValidation';
 
 export const LoginPage = () => {
-  const [itens, setItens] = useState<any>({});
+  const [itens, setItens] = useState<LoginFormSchema | {}>({});
   const auth = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      const validated = await LoginSchema.validate(itens);
+      const { email, password } = await schema.validate(itens);
 
-      await auth.login(validated.email, validated.password);
+      await auth.login(email, password);
+
       setItens({});
       navigate(routes.APP_HOME_ROUTE);
     } catch (err: any) {

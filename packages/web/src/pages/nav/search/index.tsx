@@ -1,4 +1,3 @@
-import { Business, Service } from '@prisma/client';
 import { useEffect, useState } from 'react';
 import { MdGpsFixed, MdSearch, MdStar } from 'react-icons/md';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -7,6 +6,7 @@ import { Input } from '~/components/Input';
 import { List } from '~/components/List';
 import useAuth from '~/hooks/useAuth';
 import useFetch from '~/hooks/useFetch';
+import { Service } from '~/interfaces/services';
 import { isIncluded } from '~/utils/formatToSearch';
 import { ListItem } from './ListItem';
 
@@ -17,8 +17,6 @@ export const SearchPage = () => {
 
   return (
     <div className="flex flex-col space-y-2 h-full w-full justify-start py-2 pt-6 px-1 bg-teal-500">
-      {!isAuthenticated && <Navigate to={'/'} />}
-
       <div className="flex w-full mx-auto px-4 justify-evenly max-w-lg">
         <Input
           className="bg-white px-4 py-2"
@@ -33,7 +31,7 @@ export const SearchPage = () => {
         data={(service || []).filter((item) => isIncluded(item.name, search))}
         loading={loading}
         title="Pesquisar Serviços"
-        render={(item, index) => (
+        render={(item: Service, index) => (
           <ListItem
             key={index}
             name={item.name}

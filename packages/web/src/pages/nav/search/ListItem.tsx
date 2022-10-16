@@ -17,7 +17,7 @@ export const ListItem = ({ name, description, business = 'Loja' }: Props) => {
             {name}
           </h3>
           <div className="flex flex-row items-center space-x-1 text-xs  font-semibold text-slate-600">
-            <MdStore className='text-teal-500' />
+            <MdStore className="text-teal-500" />
             <p className="line-clamp-1">{business}</p>
           </div>
           <div className="line-clamp-1 text-xs text-slate-400">

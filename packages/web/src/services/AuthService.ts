@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 import { api } from '~/configs';
 import { LoginSuccessResponse, RegisterSuccessResponse } from '~/interfaces';
+import { RegisterFormSchema } from '~/pages/register/FormValidation';
 import { InternalError } from '~/utils/helpers';
 
 export default {
@@ -16,7 +17,7 @@ export default {
       throw new InternalError(err);
     }
   },
-  signUp: async (data: User) => {
+  signUp: async (data: RegisterFormSchema) => {
     try {
       const response = await api.post<RegisterSuccessResponse>(
         '/auth/register',

@@ -5,7 +5,7 @@ interface Props {
   ratings: any[];
 }
 
-export const StarRating = ({ ratings }: Props) => {
+export const StarRating = ({ ratings = [] }: Props) => {
   const stars = Array.from(Array(5).keys());
   const [value, setValue] = useState<number>(-1);
 

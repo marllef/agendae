@@ -2,18 +2,23 @@ import { useCallback } from 'react';
 import { Button } from '~/components/Button';
 import { Skeleton } from '~/components/Skeleton';
 import { StarRating } from '~/components/StarRating';
+import colors from 'tailwindcss/colors';
 
 interface Props {
   data: any[];
-  title: string;
+  className?: string;
+  title?: string;
   loading?: boolean;
+  color?: string;
   error?: string;
   render?: (item: any, index: number, arr?: any[]) => any;
 }
 
 export const List = ({
   data = [],
-  title,
+  title = '',
+  className = '',
+  color,
   render: renderFn,
   loading = true,
 }: Props) => {
@@ -27,10 +32,17 @@ export const List = ({
   );
 
   return (
-    <div className="h-full space-y-2 px-2 overflow-auto">
-      <h3 className="font-bold text-teal-200 uppercase text-sm bg-teal-500 p-2 sticky top-0">
-        {title}
-      </h3>
+    <div
+      className={`h-full space-y-2 px-2 overflow-auto bg-inherit ${className}`}
+    >
+      {title && (
+        <h3
+          style={{ color }}
+          className="font-bold text-teal-200 uppercase text-sm bg-inherit p-2 z-10 sticky top-0 left-0"
+        >
+          {title}
+        </h3>
+      )}
 
       {(data || [])?.map(render)}
 

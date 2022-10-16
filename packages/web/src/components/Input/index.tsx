@@ -23,7 +23,7 @@ export const Input = ({
       )}
       <input
         placeholder={placeholder}
-        className={`${className} flex w-full bg-slate-200 border-slate-300 placeholder:text-slate-400 rounded-full 
+        className={`${className} flex w-full bg-white border-slate-300 placeholder:text-slate-400 rounded-full 
         ${IconL ? 'pl-9' : ''} 
         ${IconR ? 'pr-9' : ''} 
         focus:outline-none px-3 py-2 focus:ring ring-teal-400`}

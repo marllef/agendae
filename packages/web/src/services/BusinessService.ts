@@ -1,6 +1,5 @@
-import { Business } from '@prisma/client';
 import { api } from '~/configs';
-import { InternalError } from '~/utils/helpers';
+import { Business } from '~/interfaces/business';
 
 export default {
   getAll: async () => {
@@ -9,8 +8,16 @@ export default {
 
       return response.data;
     } catch (err: any) {
-      throw new InternalError(err);
+      throw err;
     }
   },
-  
+  getOne: async (id: number) => {
+    try {
+      const response = await api.get<Business>(`business/${id}`);
+
+      return response.data;
+    } catch (err: any) {
+      throw err;
+    }
+  },
 };

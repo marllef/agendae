@@ -6,6 +6,9 @@ import { MouseEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from '~/hooks/useAuth';
 import { InternalError } from '~/utils/helpers';
+import { registerSchema } from './FormValidation';
+import { Toastify } from '~/utils/toast';
+import { routes } from '~/configs';
 
 export const RegisterPage = () => {
   const [itens, setItens] = useState<any>({});
@@ -17,11 +20,13 @@ export const RegisterPage = () => {
   const handleSubmit = async (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     try {
-      if (!validate) throw new InternalError('Informe os dados corretamente.');
-      await auth.register(itens);
-      navigate('/home/app');
+      const validated = await registerSchema.validate(itens);
+      await auth.register(validated);
+      Toastify.success('Registrado com sucesso!');
+      navigate(routes.APP_HOME_ROUTE);
     } catch (err) {
-      console.log(err);
+      const error = new InternalError(err);
+      Toastify.error(error.message);
     }
   };
 
