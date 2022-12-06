@@ -1,14 +1,10 @@
 import { useEffect, useState } from 'react';
-import { MdArrowBack as ArrowBack } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
-import colors from 'tailwindcss/colors';
 import { BackButton } from '~/components/Button/BackButton';
-import { IconButton } from '~/components/Button/IconButton';
 import { Carousel } from '~/components/Carousel';
 import { List } from '~/components/List';
-import { Responsive } from '~/components/Responsive';
+import { ScheduleModal } from '~/components/Modal';
 import { StarRating } from '~/components/StarRating';
-import useTabBar from '~/hooks/useTabBar';
 import { Business } from '~/interfaces/business';
 import { Service } from '~/interfaces/services';
 import BusinessService from '~/services/BusinessService';
@@ -17,6 +13,8 @@ import { ListItem } from './ListItem';
 export const BusinessPage = () => {
   const [data, setData] = useState<Business>();
   const [loading, setLoading] = useState(true);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [scheduleId, setScheduleId] = useState<number | null>(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -70,12 +68,24 @@ export const BusinessPage = () => {
             render={(service: Service, index) => (
               <ListItem
                 key={service.id + index}
+                id={service.id}
                 name={service.name}
                 value={Number(service.value)}
                 description={service.description}
+                onClick={() => {
+                  setScheduleId(service.id);
+                  setIsOpenModal(true);
+                }}
               />
             )}
           />
+          {scheduleId && (
+            <ScheduleModal
+              open={isOpenModal}
+              scheduleId={scheduleId}
+              onClose={() => setIsOpenModal(false)}
+            />
+          )}
         </div>
       </div>
     </div>

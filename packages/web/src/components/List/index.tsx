@@ -33,15 +33,17 @@ export const List = ({
 
   return (
     <div
-      className={`h-full space-y-2 px-2 overflow-auto bg-inherit ${className}`}
+      className={`h-full space-y-2 px-2 pb-2 overflow-auto bg-inherit ${className}`}
     >
       {title && (
-        <h3
-          style={{ color }}
-          className="font-bold text-teal-200 uppercase text-sm bg-inherit p-2 z-10 sticky top-0 left-0"
-        >
-          {title}
-        </h3>
+        <div className="bg-teal-500 sticky p-2 z-10 top-0 left-0 right-0">
+          <h3
+            style={{ color }}
+            className="font-bold text-teal-200 uppercase text-sm bg-inherit bg-teal-600 "
+          >
+            {title}
+          </h3>
+        </div>
       )}
 
       {(data || [])?.map(render)}

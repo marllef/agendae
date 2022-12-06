@@ -76,7 +76,7 @@ export class ServiceService {
   }
 
   async findOne(id: number) {
-    const service = await this.prisma.service.findMany({
+    const service = await this.prisma.service.findFirst({
       where: {
         id,
       },

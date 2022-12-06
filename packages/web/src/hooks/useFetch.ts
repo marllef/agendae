@@ -10,7 +10,7 @@ const fetcher = async (url: string) => {
 };
 
 export default <T = unknown>(
-  url: string,
+  url: string | null,
   configs?: Partial<PublicConfiguration<T, any, BareFetcher<T>>>,
 ) => {
   const { data, error, isValidating } = useSWR<T>(url, fetcher, configs);

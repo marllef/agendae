@@ -1,14 +1,17 @@
+import { useNavigate } from 'react-router-dom';
 import { BRL } from '~/utils/currency';
 
 interface Props {
+  id: number;
   name: string;
   description: string;
   value: number;
+  onClick?: () => void
 }
 
-export const ListItem = ({ name, description, value }: Props) => {
+export const ListItem = ({ name, description, value, onClick }: Props) => {
   return (
-    <div className="flex items-center px-2 max-h-[7rem] h-full w-full space-x-3 bg-slate-100 rounded-lg overflow-hidden">
+    <div className="flex items-center px-2 max-h-[7rem] h-full w-full space-x-3 bg-slate-100 rounded-lg overflow-hidden" onClick={onClick}>
       <div className="bg-teal-500 min-w-[6rem] h-24 rounded-lg"></div>
       <div className="flex flex-col h-full flex-1 justify-between py-1">
         <div>
