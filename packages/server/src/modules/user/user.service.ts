@@ -2,15 +2,23 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  OnApplicationBootstrap,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import * as bcrypt from 'bcrypt';
+import { Roles } from '@prisma/client';
 
 @Injectable()
-export class UserService {
+export class UserService implements OnApplicationBootstrap {
   constructor(private readonly prisma: PrismaService) {}
+  async onApplicationBootstrap() {
+    const users = await this.prisma.user.findMany({})
+    if (users.length == 0) {
+      this.create({email: "admin", name:"Administrador", image:"", password:"admin", roles: [Roles.ADMIN]})
+    }
+  }
 
   async create({ email, name, image, password, roles }: CreateUserDto) {
     const alreadExists = await this.prisma.user.findFirst({

@@ -5,6 +5,9 @@
   "author": "Marllef H. A. Freitas <marllef.alves@gmail.com>",
   "private": true,
   "license": "MIT",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { keys } from '~/configs';
 
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3005/api",
 });
 
 api.interceptors.request.use(

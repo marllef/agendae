@@ -1,6 +1,6 @@
 # Agendae
 
-App de agendamentos.
+App de agendamentos de horarios.
 
 ## Tecnologias Utilizadas
 
